@@ -117,6 +117,10 @@ function mobf_init_world_specific_settings()
 			file:write("\n")
 			file:close()
 			
+			--[[os.rename produces an error if 'newname' already exists. So,
+			the line of code below will prevent the unwanted behaviour.]]
+			os.remove(mobf_world_path .. "/mobf_settings.conf")
+			
 			if not os.rename(mobf_world_path .. "/mobf_settings.conf.new",
 				mobf_world_path .. "/mobf_settings.conf") then
 				minetest.log(LOGLEVEL_ERROR,"MOBF: failed to swap old conf file to new one")
